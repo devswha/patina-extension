@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Patina</title><link rel="stylesheet" href="popup.css"><script src="popup.js" defer></script></head>
+<body>
+  <h1>Patina</h1>
+  <p>Local writing signals for Gmail drafts.</p>
+  <label>Language <select id="language"><option value="auto">Automatic</option><option value="en">English</option><option value="ko">Korean</option></select></label>
+  <label>Warning threshold <input id="threshold" type="number" min="0" max="100" step="1" value="30"></label>
+  <button id="score" type="button">Score selection</button>
+  <button id="humanize" type="button">Humanize with Patina CLI</button>
+  <p id="status" role="status">Select text in a Gmail compose body.</p>
+  <section id="handoff" hidden>
+    <p>Copy the selection into a local text file, then review a verified CLI rewrite:</p>
+    <code id="command">patina --verify draft.txt</code>
+    <textarea id="selection" readonly aria-label="Selected text for local CLI handoff"></textarea>
+    <button id="copy" type="button">Copy selection</button>
+    <p>The CLI uses your configured provider. This extension does not call a model.</p>
+  </section>
+  <small>Scores measure flagged prose paragraphs. Patina does not upload drafts. Only language and threshold settings are saved.</small>
+</body>
+</html>
