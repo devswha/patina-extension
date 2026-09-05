@@ -1,0 +1,26 @@
+name: Tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          repository: devswha/patina
+          ref: 8a66e31901266c5ad5f3de509f7fbc771829edf7
+          path: .patina-core
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: npm ci --prefix .patina-core
+      - run: npm ci
+      - run: npm run build
+        env:
+          PATINA_CORE_ROOT: ${{ github.workspace }}/.patina-core
+      - run: npm test
+        env:
+          PATINA_CORE_ROOT: ${{ github.workspace }}/.patina-core
+      - run: npm run lint
