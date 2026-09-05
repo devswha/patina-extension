@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Patina Local Writing Signals",
+  "version": "1.0.0",
+  "description": "Check local writing signals in Gmail drafts. Scoring sends no draft text to a server.",
+  "minimum_chrome_version": "110",
+  "permissions": ["storage"],
+  "action": { "default_popup": "popup.html", "default_title": "Patina" },
+  "content_scripts": [{
+    "matches": ["https://mail.google.com/*"],
+    "js": ["content.js"],
+    "css": ["content.css"],
+    "run_at": "document_idle"
+  }],
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'" }
+}
